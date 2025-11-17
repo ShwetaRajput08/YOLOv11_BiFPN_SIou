@@ -1,5 +1,8 @@
 import argparse
 from ultralytics import YOLO
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+os.environ["OMP_NUM_THREADS"] = "1"
 
 
 def parse_opt():
@@ -24,7 +27,7 @@ if __name__ == '__main__':
                 epochs=opt.epochs,
                 batch=opt.batch,
                 workers=opt.workers,
-                device=opt.device,
+                device='cpu',
                 optimizer='SGD',
                 close_mosaic=10,
                 resume=opt.resume,

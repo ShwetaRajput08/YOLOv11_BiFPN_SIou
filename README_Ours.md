@@ -77,7 +77,7 @@ facilitating archaeological discoveries and the establishment of inventories in 
 
 To train the YOLOv11_BiFPN_SIou model:
  ```sh
-  python mytrain.py --batch 32
+   
   #When GPU memory is insufficient, one may attempt to reduce the batch size, for example, --batch 8.
   #As shown in the figure below, should an error message such as ‘No module named “tqdm”’ appear, proceed with installation using the command ‘pip install “xxxx”’.
   #![img_1.png](img_1.png)

@@ -25,6 +25,8 @@ __all__ = (
     "BiFPN_Concat3"
 
 )
+# Combine BiFPN to set learnable parameters and learn the weights of different branches
+# Concatenate two branches
 # 结合BiFPN 设置可学习参数 学习不同分支的权重
 # 两个分支concat操作
 class BiFPN_Concat2(nn.Module):
@@ -43,6 +45,7 @@ class BiFPN_Concat2(nn.Module):
 
 
 # 三个分支concat操作
+# Concat operation for three branches
 class BiFPN_Concat3(nn.Module):
     def __init__(self, dimension=1):
         super(BiFPN_Concat3, self).__init__()
