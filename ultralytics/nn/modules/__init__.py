@@ -86,7 +86,8 @@ from .transformer import (
     TransformerEncoderLayer,
     TransformerLayer,
 )
-
+from .adaslicer import AdaSlicerGate, ObjSeeker # add by SNR
+from .fusion import ASFF, ASFF2, ASFF3, HFP, SDP # add by SNR
 __all__ = (
     "Conv",
     "Conv2",
@@ -158,4 +159,9 @@ __all__ = (
     "Attention",
     "PSA",
     'Concat_BiFPN',
+    "ASFF",  # add by SNR
+    "ASFF2",
+    "ASFF3",
+    "HFP",
+    "SDP"
 )

@@ -6,6 +6,8 @@ import types
 from copy import deepcopy
 from pathlib import Path
 from ultralytics.nn.modules.conv import BiFPN_Concat2, BiFPN_Concat3
+from ultralytics.nn.modules.adaslicer import AdaSlicerGate   # <-- add this line SNR
+from ultralytics.nn.modules.fusion import ASFF, ASFF2, ASFF3, HFP, SDP # add by SNR
 import torch
 import torch.nn as nn
 
@@ -1060,6 +1062,19 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             args = [c1, c2, *args[1:]]
         elif m is CBFuse:
             c2 = ch[f[-1]]
+        elif m is AdaSlicerGate:  # <-- add this branch SNR
+            c2 = ch[f]  # channel-preserving: output == input SNR
+            args = [c2]  # AdaSlicerGate(c1) — c1 inferred automatically SNR
+        elif m in {ASFF, ASFF2, ASFF3}:  # start adding SNR
+            chs = [ch[x] for x in f]
+            c2 = chs[args[0]]
+            args = [chs, args[0]]
+        elif m is SDP:
+            c2 = ch[f[0]]
+            args = [[ch[x] for x in f]]
+        elif m is HFP:
+            c2 = ch[f]
+            args = [c2]  # end SNR
         else:
             c2 = ch[f]
 
